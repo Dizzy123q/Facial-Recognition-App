@@ -19,7 +19,7 @@ class MeniuPrincipal(QDialog):
     def __init__(self, parent=None):
         super(MeniuPrincipal, self).__init__(parent)
 
-        self.setWindowTitle("Recunoaștere facială")
+        self.setWindowTitle("Facial recognition")
         self.setWindowIcon(QIcon('face-scan.png'))
         self.setFixedWidth(500)
 
@@ -28,24 +28,24 @@ class MeniuPrincipal(QDialog):
         layout.setContentsMargins(24, 32, 24, 32)
         layout.setAlignment(Qt.AlignCenter)
 
-        self.titlu = QLabel("Recunoaștere facială")
+        self.titlu = QLabel("Facial recognition")
         self.titlu.setObjectName('titlu')
         self.titlu.setAlignment(Qt.AlignCenter)
         layout.addWidget(self.titlu)
 
-        self.subtitlu = QLabel("Alegeți modul dorit")
+        self.subtitlu = QLabel("Choose a mode")
         self.subtitlu.setObjectName('subtitlu')
         self.subtitlu.setAlignment(Qt.AlignCenter)
         layout.addWidget(self.subtitlu)
 
         layout.addSpacing(16)
 
-        self.btn_video = QPushButton("Recunoaștere video")
+        self.btn_video = QPushButton("Video recognition")
         self.btn_video.setObjectName('btn_primary')
         self.btn_video.clicked.connect(self.deschide_recunoasterea_video)
         layout.addWidget(self.btn_video)
 
-        self.btn_foto = QPushButton("Recunoaștere în poze")
+        self.btn_foto = QPushButton("Photo recognition")
         self.btn_foto.clicked.connect(self.deschide_recunoasterea_photo)
         layout.addWidget(self.btn_foto)
 
@@ -54,7 +54,7 @@ class MeniuPrincipal(QDialog):
         separator.setStyleSheet("color: #2c2c2e;")
         layout.addWidget(separator)
 
-        self.btn_adaugare = QPushButton("Adaugă persoană în baza de date")
+        self.btn_adaugare = QPushButton("Add person to database")
         self.btn_adaugare.clicked.connect(self.deschide_meniul_de_adaugare_in_baza_de_date)
         layout.addWidget(self.btn_adaugare)
 

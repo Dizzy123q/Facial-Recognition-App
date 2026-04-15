@@ -15,7 +15,7 @@ class AdaugaInBazaDeDate(QWidget):
 
         self.nume_fisier_clasa = ""
 
-        self.setWindowTitle("Adăugare în baza de date")
+        self.setWindowTitle("Add to database")
         self.setWindowIcon(QIcon('face-scan.png'))
         self.setFixedWidth(550)
 
@@ -23,16 +23,16 @@ class AdaugaInBazaDeDate(QWidget):
         layout.setSpacing(10)
         layout.setContentsMargins(16, 16, 16, 16)
 
-        self.titlu = QLabel("Adăugare în baza de date")
+        self.titlu = QLabel("Add to database")
         self.titlu.setObjectName('titlu')
         layout.addWidget(self.titlu)
 
-        self.btn_inapoi = QPushButton("← Înapoi la meniu")
+        self.btn_inapoi = QPushButton("← Back to menu")
         self.btn_inapoi.clicked.connect(self.inapoi_la_meniu)
         layout.addWidget(self.btn_inapoi)
 
         # sectiune fotografie
-        self.label_foto = QLabel("FOTOGRAFIE")
+        self.label_foto = QLabel("PHOTO")
         self.label_foto.setObjectName('sectiune')
         layout.addWidget(self.label_foto)
 
@@ -44,14 +44,14 @@ class AdaugaInBazaDeDate(QWidget):
         layout_foto.setContentsMargins(14, 14, 14, 14)
         layout_foto.setSpacing(10)
 
-        self.eticheta_fisier = QLabel("Niciun fișier selectat")
+        self.eticheta_fisier = QLabel("No file selected")
         self.eticheta_fisier.setAlignment(Qt.AlignCenter)
         self.eticheta_fisier.setStyleSheet(
             "color: #555; font-size: 12px; border: 0.5px dashed #3a3a3c; border-radius: 12px; padding: 16px;"
         )
         layout_foto.addWidget(self.eticheta_fisier)
 
-        self.btn_incarcare = QPushButton("Încarcă fotografia")
+        self.btn_incarcare = QPushButton("Load photo")
         self.btn_incarcare.clicked.connect(self.deschide_selectarea_fisierului)
         layout_foto.addWidget(self.btn_incarcare)
 
@@ -59,7 +59,7 @@ class AdaugaInBazaDeDate(QWidget):
         layout.addWidget(self.sectiune_foto)
 
         # sectiune nume
-        self.label_nume = QLabel("NUME PERSOANĂ")
+        self.label_nume = QLabel("PERSON NAME")
         self.label_nume.setObjectName('sectiune')
         layout.addWidget(self.label_nume)
 
@@ -73,10 +73,10 @@ class AdaugaInBazaDeDate(QWidget):
 
         row = QHBoxLayout()
         self.input_nume = QLineEdit()
-        self.input_nume.setPlaceholderText("Ex: Ion Popescu")
+        self.input_nume.setPlaceholderText("Ex: John Doe")
         row.addWidget(self.input_nume)
 
-        self.btn_adauga = QPushButton("Adaugă")
+        self.btn_adauga = QPushButton("Add")
         self.btn_adauga.setObjectName('btn_primary')
         self.btn_adauga.setFixedWidth(120)
         self.btn_adauga.clicked.connect(self.adauga_in_baza_de_date)
@@ -97,7 +97,7 @@ class AdaugaInBazaDeDate(QWidget):
         optiuni = QFileDialog.Options()
         optiuni |= QFileDialog.DontUseNativeDialog
         nume_fisier, _ = QFileDialog.getOpenFileName(
-            self, "Selectați poza dorită", "",
+            self, "Select the desired photo", "",
             "Image files (*.jpg *.png)", options=optiuni
         )
         if nume_fisier:
@@ -109,7 +109,7 @@ class AdaugaInBazaDeDate(QWidget):
 
     def adauga_in_baza_de_date(self):
         if not self.nume_fisier_clasa:
-            self.label_status.setText("Selectați o fotografie mai întâi.")
+            self.label_status.setText("Please select a photo first.")
             return
 
         cale_fisier = self.nume_fisier_clasa
@@ -122,16 +122,16 @@ class AdaugaInBazaDeDate(QWidget):
 
             nume_nou = self.input_nume.text().strip().title().replace(" ", "_")
             if not nume_nou:
-                self.label_status.setText("Introduceți un nume.")
+                self.label_status.setText("Please enter a name.")
                 return
 
             os.rename(cale_cu_nume_fisier, cale_de_salvare + nume_nou + ".jpg")
-            self.label_status.setText("Persoana a fost adăugată cu succes.")
+            self.label_status.setText("Person added successfully.")
 
         except FileNotFoundError:
-            self.label_status.setText("Fișierul nu a fost găsit.")
+            self.label_status.setText("File not found.")
         except Exception as e:
-            self.label_status.setText(f"Eroare: {e}")
+            self.label_status.setText(f"Error: {e}")
 
     def inapoi_la_meniu(self):
         self.meniu = menu.MeniuPrincipal()

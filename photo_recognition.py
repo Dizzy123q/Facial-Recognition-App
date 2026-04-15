@@ -16,18 +16,18 @@ class RecunoasterePhoto(QWidget):
 
         self.nume_fisier = ""
 
-        self.setWindowTitle("Recunoaștere în poze")
+        self.setWindowTitle("Photo recognition")
         self.setWindowIcon(QIcon('face-scan.png'))
 
         layout_principal = QVBoxLayout()
         layout_principal.setSpacing(10)
         layout_principal.setContentsMargins(16, 16, 16, 16)
 
-        self.titlu = QLabel("Recunoaștere în poze")
+        self.titlu = QLabel("Photo recognition")
         self.titlu.setObjectName('titlu')
         layout_principal.addWidget(self.titlu)
 
-        self.btn_inapoi = QPushButton("← Înapoi la meniu")
+        self.btn_inapoi = QPushButton("← Back to menu")
         self.btn_inapoi.clicked.connect(self.intoarcere_la_meniu)
         layout_principal.addWidget(self.btn_inapoi)
 
@@ -39,11 +39,11 @@ class RecunoasterePhoto(QWidget):
         layout_stanga.setSpacing(8)
         layout_stanga.setAlignment(Qt.AlignTop)
 
-        self.btn_incarcare = QPushButton("Încarcă poza")
+        self.btn_incarcare = QPushButton("Load photo")
         self.btn_incarcare.clicked.connect(self.deschide_selectarea_fisierului)
         layout_stanga.addWidget(self.btn_incarcare)
 
-        self.btn_verificare = QPushButton("Verifică persoana")
+        self.btn_verificare = QPushButton("Verify person")
         self.btn_verificare.setObjectName('btn_primary')
         self.btn_verificare.clicked.connect(self.recunoastere_foto)
         layout_stanga.addWidget(self.btn_verificare)
@@ -57,7 +57,7 @@ class RecunoasterePhoto(QWidget):
         layout_rezultat.setContentsMargins(14, 14, 14, 14)
         layout_rezultat.setSpacing(6)
 
-        self.label_rezultat_titlu = QLabel("REZULTAT")
+        self.label_rezultat_titlu = QLabel("RESULT")
         self.label_rezultat_titlu.setObjectName('sectiune')
         layout_rezultat.addWidget(self.label_rezultat_titlu)
 
@@ -84,7 +84,7 @@ class RecunoasterePhoto(QWidget):
         self.afisare_poza.setStyleSheet(
             "background-color: #161618; border: 0.5px solid #2c2c2e; border-radius: 14px; color: #444; font-size: 12px;"
         )
-        self.afisare_poza.setText("Nicio poză încărcată")
+        self.afisare_poza.setText("No photo loaded")
         layout_dreapta.addWidget(self.afisare_poza)
 
         self.label_fisier = QLabel("")
@@ -100,7 +100,7 @@ class RecunoasterePhoto(QWidget):
         optiuni = QFileDialog.Options()
         optiuni |= QFileDialog.DontUseNativeDialog
         nume_fisier, _ = QFileDialog.getOpenFileName(
-            self, "Selectați poza dorită", "",
+            self, "Select a photo", "",
             "Image files (*.jpg *.png)", options=optiuni
         )
         if nume_fisier:
@@ -126,13 +126,13 @@ class RecunoasterePhoto(QWidget):
                 nume = os.path.basename(identity).split('.')[0].replace('_', ' ')
                 incredere = round((1 - rezultate[0].iloc[0]['distance']) * 100, 2)
                 self.label_nume.setText(nume)
-                self.label_incredere.setText(f"Încredere: {incredere}%")
+                self.label_incredere.setText(f"Confidence: {incredere}%")
             else:
-                self.label_nume.setText("Neidentificat")
+                self.label_nume.setText("Not identified")
                 self.label_incredere.setText("")
 
         except Exception as e:
-            self.label_nume.setText("Eroare la recunoaștere.")
+            self.label_nume.setText("Recognition error.")
             print(e)
 
     def afisare_fotografie(self):

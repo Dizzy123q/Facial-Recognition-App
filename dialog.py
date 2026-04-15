@@ -15,20 +15,20 @@ class MyDialog(QDialog):
         Layout_vertical = QVBoxLayout()
         Layout_orizontal = QHBoxLayout()
 
-        self.setWindowTitle("A fost indentificata o persoana!")
+        self.setWindowTitle("Person identified!")
         self.setWindowIcon(QIcon('face-scan.png'))
 
-        mesaj = QLabel(f"Acesta persoana a fost identificata:  {self.nume.split('.')[-3]}")
-        mesaj2 = QLabel(f"Probabilitatea este de:  {self.nume.split(' ')[-1]}")
+        mesaj = QLabel(f"Person identified:  {self.nume.split('.')[-3]}")
+        mesaj2 = QLabel(f"Confidence:  {self.nume.split(' ')[-1]}")
         Layout_vertical.addWidget(mesaj)
         Layout_vertical.addWidget(mesaj2)
 
         # Create three buttons
-        self.buton_adauga_in_istoric = QPushButton("Adauga în istoric", self)
+        self.buton_adauga_in_istoric = QPushButton("Add to history", self)
         self.buton_adauga_in_istoric.clicked.connect(self.adauga_in_istoric)
         Layout_orizontal.addWidget(self.buton_adauga_in_istoric)
 
-        self.buton_scanare = QPushButton("Continuă scanarea", self)
+        self.buton_scanare = QPushButton("Continue scanning", self)
         self.buton_scanare.clicked.connect(self.continua_scanarea)
         # Add the buttons to a layout
 

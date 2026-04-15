@@ -16,7 +16,7 @@ class FaceRecognitionWebcam(QWidget):
     def __init__(self, parent=None):
         super(FaceRecognitionWebcam, self).__init__(parent)
 
-        self.setWindowTitle("Recunoaștere facială")
+        self.setWindowTitle("Facial recognition")
         self.setWindowIcon(QIcon('face-scan.png'))
 
         self.frame = None
@@ -39,11 +39,11 @@ class FaceRecognitionWebcam(QWidget):
         layout_stanga = QVBoxLayout()
         layout_stanga.setSpacing(8)
 
-        self.titlu = QLabel("Recunoaștere facială")
+        self.titlu = QLabel("Facial recognition")
         self.titlu.setObjectName('titlu')
         layout_stanga.addWidget(self.titlu)
 
-        self.btn_inapoi = QPushButton("← Înapoi la meniu")
+        self.btn_inapoi = QPushButton("← Back to menu")
         self.btn_inapoi.clicked.connect(self.inapoi_la_meniu)
         layout_stanga.addWidget(self.btn_inapoi)
 
@@ -53,30 +53,30 @@ class FaceRecognitionWebcam(QWidget):
         self.afisare_stream_video.setStyleSheet(
             "background-color: #161618; border: 0.5px solid #2c2c2e; border-radius: 14px; color: #444; font-size: 12px;"
         )
-        self.afisare_stream_video.setText("Camera oprită")
+        self.afisare_stream_video.setText("Camera off")
         layout_stanga.addWidget(self.afisare_stream_video)
 
-        self.label_status = QLabel("Camera inactivă")
+        self.label_status = QLabel("Camera inactive")
         self.label_status.setObjectName('status_ok')
         layout_stanga.addWidget(self.label_status)
 
         row1 = QHBoxLayout()
-        self.btn_pornire_camera = QPushButton("Pornește camera")
+        self.btn_pornire_camera = QPushButton("Start camera")
         self.btn_pornire_camera.setObjectName('btn_primary')
         self.btn_pornire_camera.clicked.connect(self.porneste_camera)
         row1.addWidget(self.btn_pornire_camera)
 
-        self.btn_pornire_recunoastere = QPushButton("Pornește recunoașterea")
+        self.btn_pornire_recunoastere = QPushButton("Start recognition")
         self.btn_pornire_recunoastere.clicked.connect(self.porneste_recunoasterea_faciala)
         row1.addWidget(self.btn_pornire_recunoastere)
         layout_stanga.addLayout(row1)
 
         row2 = QHBoxLayout()
-        self.btn_oprire_camera = QPushButton("Oprește camera")
+        self.btn_oprire_camera = QPushButton("Stop camera")
         self.btn_oprire_camera.clicked.connect(self.opreste_camera)
         row2.addWidget(self.btn_oprire_camera)
 
-        self.btn_repornire = QPushButton("Repornește scanarea")
+        self.btn_repornire = QPushButton("Restart scan")
         self.btn_repornire.clicked.connect(self.porneste_recunoasterea_faciala)
         row2.addWidget(self.btn_repornire)
         layout_stanga.addLayout(row2)
@@ -88,7 +88,7 @@ class FaceRecognitionWebcam(QWidget):
         layout_dreapta.setSpacing(8)
         layout_dreapta.setAlignment(Qt.AlignTop)
 
-        self.label_baza_date = QLabel("BAZĂ DE DATE")
+        self.label_baza_date = QLabel("DATABASE")
         self.label_baza_date.setObjectName('sectiune')
         layout_dreapta.addWidget(self.label_baza_date)
 
@@ -111,11 +111,11 @@ class FaceRecognitionWebcam(QWidget):
         layout_overlay.setContentsMargins(14, 14, 14, 14)
         layout_overlay.setSpacing(8)
 
-        self.check_fata = QCheckBox("Evidențiază fața")
+        self.check_fata = QCheckBox("Highlight face")
         self.check_fata.setChecked(False)
         layout_overlay.addWidget(self.check_fata)
 
-        self.check_nume = QCheckBox("Afișează numele")
+        self.check_nume = QCheckBox("Show name")
         self.check_nume.setChecked(False)
         layout_overlay.addWidget(self.check_nume)
 
@@ -134,19 +134,19 @@ class FaceRecognitionWebcam(QWidget):
         self.capture = cv2.VideoCapture(0)
 
         if not self.capture.isOpened():
-            self.label_status.setText("Camera nu a fost găsită.")
+            self.label_status.setText("Camera not found.")
             return
 
         self.capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
         self.capture.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
         self.afisare_stream_video.setText("")
-        self.label_status.setText("Camera activă")
+        self.label_status.setText("Camera active")
         self.timer_camera.start(30)
 
     def porneste_recunoasterea_faciala(self):
         self.overlay_nume = None
         self.overlay_box = None
-        self.label_status.setText("Scanare activă...")
+        self.label_status.setText("Scanning...")
         self.timer_recunoastere.start(1000)
 
     def afisare_camera(self):
@@ -201,7 +201,7 @@ class FaceRecognitionWebcam(QWidget):
                     )
 
                 self.overlay_nume = nume_afisat
-                self.label_status.setText(f"Detectat: {nume_detectat.replace('_', ' ')}")
+                self.label_status.setText(f"Detected: {nume_detectat.replace('_', ' ')}")
                 self.timer_recunoastere.stop()
 
                 self.fereastra_dialog = dialog.MyDialog(
@@ -215,8 +215,8 @@ class FaceRecognitionWebcam(QWidget):
     def opreste_camera(self):
         self.timer_camera.stop()
         self.timer_recunoastere.stop()
-        self.label_status.setText("Camera oprită")
-        self.afisare_stream_video.setText("Camera oprită")
+        self.label_status.setText("Camera off")
+        self.afisare_stream_video.setText("Camera off")
         self.afisare_stream_video.setPixmap(QPixmap())
 
     def inapoi_la_meniu(self):
