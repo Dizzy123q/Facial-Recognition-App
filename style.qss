@@ -1,0 +1,129 @@
+QWidget {
+    background-color: #1c1c1e;
+    color: #bbb;
+    font-family: "Inter", "Arial", sans-serif;
+    font-size: 16px;
+}
+
+QPushButton {
+    background-color: #2a2a2c;
+    color: #bbb;
+    border: 0.5px solid #3a3a3c;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+QPushButton:hover {
+    background-color: #323234;
+    border-color: #4a4a4c;
+}
+
+QPushButton:pressed {
+    background-color: #222224;
+}
+
+QPushButton#btn_primary {
+    background-color: #c8c8c8;
+    color: #1c1c1e;
+    border: none;
+}
+
+QPushButton#btn_primary:hover {
+    background-color: #b8b8b8;
+}
+
+QPushButton#btn_primary:pressed {
+    background-color: #a8a8a8;
+}
+
+QLabel {
+    color: #bbb;
+    font-size: 15px;
+}
+
+QLabel#titlu {
+    color: #bbb;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+QLabel#subtitlu {
+    color: #555;
+    font-size: 12px;
+}
+
+QLabel#sectiune {
+    color: #555;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+QLabel#status_ok {
+    color: #666;
+    font-size: 12px;
+}
+
+QLineEdit {
+    background-color: #1c1c1e;
+    color: #bbb;
+    border: 0.5px solid #3a3a3c;
+    border-radius: 12px;
+    padding: 9px 12px;
+    font-size: 12px;
+}
+
+QLineEdit:focus {
+    border-color: #555;
+}
+
+QListView {
+    background-color: #161618;
+    color: #777;
+    border: 0.5px solid #2c2c2e;
+    border-radius: 14px;
+    padding: 8px;
+    font-size: 12px;
+    outline: 0;
+}
+
+QListView::item {
+    padding: 5px 8px;
+    border-radius: 10px;
+}
+
+QListView::item:selected {
+    background-color: #2a2a2c;
+    color: #bbb;
+}
+
+QCheckBox {
+    color: #888;
+    font-size: 12px;
+    spacing: 8px;
+}
+
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 5px;
+    border: 0.5px solid #3a3a3c;
+    background-color: #2a2a2c;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #c8c8c8;
+    border-color: #c8c8c8;
+}
+
+QFileDialog {
+    color: #bbb;
+}
+
+QTreeView {
+    color: #bbb;
+    background-color: #161618;
+    border: 0.5px solid #2c2c2e;
+    border-radius: 14px;
+}
